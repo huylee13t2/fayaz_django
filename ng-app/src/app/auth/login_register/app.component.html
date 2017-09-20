@@ -1,0 +1,90 @@
+<div class="accountPage">
+    <div class="tabForm">
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#login" aria-controls="login" role="tab" data-toggle="tab">Login</a></li>
+            <li role="presentation"><a href="#register" aria-controls="register" role="tab" data-toggle="tab">Register</a></li>
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="login">
+                <form class="signupForm" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate >
+                    <h3>Login</h3>
+                    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+                        <label class="sr-only" for="username">Username</label>
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="fa fa-user-o"></span></div>
+                            <input type="text" class="form-control" id="username" placeholder="Username" name="username" [(ngModel)]="user.username" #username="ngModel" required>
+                        </div>
+                        <div *ngIf="f.submitted && !username.valid" class="help-block" >Username is required</div>
+                    </div>
+                    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+                        <label class="sr-only" for="password">Password</label>
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="fa fa-key"></span></div>
+                            <input type="password" class="form-control" id="password" placeholder="Password" name="password" [(ngModel)]="user.password" #password="ngModel" required>
+                        </div>
+                        <div *ngIf="f.submitted && !password.valid" class="help-block" >Password is required</div>
+                    </div>
+                    <div class="form-group" style="text-align: center;">
+                        <button type="submit" class="btn btn-primary loginBtn">Login</button>
+                    </div>
+                </form>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="register">
+                <form class="signupForm" (ngSubmit)="f.form.valid && signup()" #f="ngForm" novalidate >
+                    <h3>Register</h3>
+                    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+                        <label class="sr-only" for="username">Username</label>
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="fa fa-user-o"></span></div>
+                            <input type="text" class="form-control" id="username" placeholder="Username" name="username" [(ngModel)]="user.username" #username="ngModel" required>
+                        </div>
+                        <div *ngIf="f.submitted && !username.valid" class="help-block" >Username is required</div>
+                    </div>
+                    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+                        <label class="sr-only" for="password">Password</label>
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="fa fa-key"></span></div>
+                            <input type="password" class="form-control" id="password" placeholder="Password" name="password" [(ngModel)]="user.password" #password="ngModel" required>
+                        </div>
+                        <div *ngIf="f.submitted && !password.valid" class="help-block" >Password is required</div>
+                    </div>
+                    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !re_password.valid && (user.password !== user.re_password)}">
+                        <label class="sr-only" for="re_password">Re-Password</label>
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="fa fa-refresh"></span></div>
+                            <input type="password" class="form-control" id="re_password" placeholder="Re-Password" name="re_password" [(ngModel)]="user.re_password" #re_password="ngModel" required>
+                        </div>
+                        <div *ngIf="f.submitted && !re_password.valid" class="help-block" style="color: #a94442;">Re-Password is required</div>
+                        <div *ngIf="f.submitted && re_password.valid && (user.password !== user.re_password)" class="help-block" style="color: #a94442;">Re-Password do not equals!</div>
+                    </div>
+                    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
+                        <label class="sr-only" for="email">Email</label>
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="fa fa-envelope-o"></span></div>
+                            <input type="email" class="form-control" id="email" placeholder="Email" name="email" [(ngModel)]="user.email" #email="ngModel" required>
+                        </div>
+                        <div *ngIf="f.submitted && !email.valid" class="help-block">Email is required</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="phone_number">Phone Number</label>
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="fa fa-phone"></span></div>
+                            <input type="number" class="form-control" id="phone_number" placeholder="Phone Number" name="phone_number" [(ngModel)]="user.phone_number">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="city">City</label>
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="fa fa-map-marker"></span></div>
+                            <input type="text" class="form-control" id="city" placeholder="City" name="city" [(ngModel)]="user.city">
+                        </div>
+                    </div>
+                    <div class="form-group" style="text-align: center;">
+                        <button type="submit" class="btn btn-primary loginBtn">Signup</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
