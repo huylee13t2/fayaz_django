@@ -40,6 +40,7 @@ import {
 import { AppRoutingModule } from './app-routing.module';
 
 import { MainComponent } from './main/app.component';
+import { LandPageComponent } from './land-page/app.component';
 import { DashboardComponent } from './dashboard/app.component';
 // auth
 import { LoginComponent } from './auth/login/app.component';
@@ -49,6 +50,7 @@ import { LoginRegisterComponent } from './auth/login_register/app.component';
 @NgModule({
 	declarations: [
 		MainComponent,
+		LandPageComponent,
 		DashboardComponent,
 		// auth
 		LoginComponent,
