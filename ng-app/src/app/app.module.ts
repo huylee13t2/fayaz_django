@@ -36,6 +36,7 @@ import {
   MdToolbarModule,
   MdTooltipModule,
 } from '@angular/material';
+import { SimpleNotificationsModule, PushNotificationsModule } from 'angular2-notifications';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -46,6 +47,9 @@ import { DashboardComponent } from './dashboard/app.component';
 import { LoginComponent } from './auth/login/app.component';
 import { RegisterComponent } from './auth/register/app.component';
 import { LoginRegisterComponent } from './auth/login_register/app.component';
+
+// service
+import { MainService } from './app.service';
 
 @NgModule({
 	declarations: [
@@ -63,6 +67,8 @@ import { LoginRegisterComponent } from './auth/login_register/app.component';
 		FormsModule,
 		HttpModule,
 		BrowserAnimationsModule,
+		SimpleNotificationsModule.forRoot(),
+		PushNotificationsModule,
 		// material
 		MdAutocompleteModule,
 		MdButtonModule,
@@ -129,7 +135,9 @@ import { LoginRegisterComponent } from './auth/login_register/app.component';
 		MdToolbarModule,
 		MdTooltipModule,
 	],
-	providers: [],
+	providers: [
+		MainService,
+	],
 	bootstrap: [MainComponent]
 })
 export class AppModule { }

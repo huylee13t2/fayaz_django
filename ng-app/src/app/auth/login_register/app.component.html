@@ -1,8 +1,8 @@
 <div class="accountPage">
     <div class="tabForm">
         <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#login" aria-controls="login" role="tab" data-toggle="tab">Login</a></li>
-            <li role="presentation"><a href="#register" aria-controls="register" role="tab" data-toggle="tab">Register</a></li>
+            <li role="presentation" class="tab_login active"><a href="#login" aria-controls="login" role="tab" data-toggle="tab">Login</a></li>
+            <li role="presentation" class="tab_signup"><a href="#register" aria-controls="register" role="tab" data-toggle="tab">Register</a></li>
         </ul>
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="login">
@@ -30,7 +30,7 @@
                 </form>
             </div>
             <div role="tabpanel" class="tab-pane" id="register">
-                <form class="signupForm" (ngSubmit)="f.form.valid && signup()" #f="ngForm" novalidate >
+                <form class="signupForm" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate >
                     <h3>Register</h3>
                     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
                         <label class="sr-only" for="username">Username</label>
@@ -52,10 +52,10 @@
                         <label class="sr-only" for="re_password">Re-Password</label>
                         <div class="input-group">
                             <div class="input-group-addon"><span class="fa fa-refresh"></span></div>
-                            <input type="password" class="form-control" id="re_password" placeholder="Re-Password" name="re_password" [(ngModel)]="user.re_password" #re_password="ngModel" required>
+                            <input type="password" class="form-control" id="re_password" placeholder="Re-Password" name="re_password" (blur)="onBlurMethod()" [(ngModel)]="user.re_password" #re_password="ngModel" required>
                         </div>
                         <div *ngIf="f.submitted && !re_password.valid" class="help-block" style="color: #a94442;">Re-Password is required</div>
-                        <div *ngIf="f.submitted && re_password.valid && (user.password !== user.re_password)" class="help-block" style="color: #a94442;">Re-Password do not equals!</div>
+                        <div *ngIf="!forgot_pass" class="help-block" style="color: #a94442;">Re-Password do not equals!</div>
                     </div>
                     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
                         <label class="sr-only" for="email">Email</label>
@@ -65,22 +65,34 @@
                         </div>
                         <div *ngIf="f.submitted && !email.valid" class="help-block">Email is required</div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !phone_number.valid }">
                         <label class="sr-only" for="phone_number">Phone Number</label>
                         <div class="input-group">
                             <div class="input-group-addon"><span class="fa fa-phone"></span></div>
-                            <input type="number" class="form-control" id="phone_number" placeholder="Phone Number" name="phone_number" [(ngModel)]="user.phone_number">
+                            <input type="number" class="form-control" id="phone_number" placeholder="Phone Number" name="phone_number" [(ngModel)]="user.phone_number" #phone_number="ngModel" >
                         </div>
+                        <div *ngIf="f.submitted && !username.valid" class="help-block" style="color: #a94442;">Phone number is required</div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !city.valid }">
                         <label class="sr-only" for="city">City</label>
                         <div class="input-group">
                             <div class="input-group-addon"><span class="fa fa-map-marker"></span></div>
-                            <input type="text" class="form-control" id="city" placeholder="City" name="city" [(ngModel)]="user.city">
+                            <input type="text" class="form-control" id="city" placeholder="City" name="city" [(ngModel)]="user.city" #city="ngModel" >
+                        </div>
+                        <div *ngIf="f.submitted && !username.valid" class="help-block" style="color: #a94442;" >City is required</div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon"><span class="fa fa-snowflake-o"></span></div>
+                            <!-- <input type="text" class="form-control" id="city" placeholder="City" name="city" [(ngModel)]="user.city" #city="ngModel" > -->
+                            <select class="form-control" [(ngModel)]="user.type_account" [ngModelOptions]="{standalone: true}">
+                                <option value="paid">Paid</option>
+                                <option value="referral">Referral</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group" style="text-align: center;">
-                        <button type="submit" class="btn btn-primary loginBtn">Signup</button>
+                        <button type="submit" class="btn btn-primary">Register</button>
                     </div>
                 </form>
             </div>
@@ -88,3 +100,5 @@
 
     </div>
 </div>
+
+<simple-notifications [options]="options"></simple-notifications>

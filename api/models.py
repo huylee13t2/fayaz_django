@@ -15,9 +15,17 @@ def content_file_name(instance, filename):
 
 
 class Profile(models.Model):
+	list_choice_type = (
+	    ("paid", "Paid"),
+	    ("referral", "Referral"),
+	)
+
 	user = models.ForeignKey(User, related_name="user_profile", null=True)
 	fullname = models.CharField(max_length=255, blank=True, null=True)
-	avatar = models.ImageField(upload_to=content_file_name, null=True)
+	avatar = models.ImageField(upload_to=content_file_name, default='avt.png', blank=True, null=True)
+	phone = models.IntegerField(blank=True, null=True)
+	city = models.CharField(max_length=255, blank=True, null=True)
+	type_account = models.CharField(max_length=9, choices=list_choice_type, default="buy")
 	token = models.CharField(max_length=255, blank=True, null=True)
 	updated_by = models.ForeignKey(User, related_name='blog_updated_by', editable=True, null=True)
 	created_by = models.ForeignKey(User, related_name='blog_created_by', editable=True, null=True)
