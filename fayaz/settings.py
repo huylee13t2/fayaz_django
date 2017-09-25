@@ -27,7 +27,7 @@ SECRET_KEY = '*97=p@+n=h2h2%ir1jewmwf-5)*fasy3%v(cfm4!bfl#vy8pdf'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = ['localhost', 'fayaz123.pythonanywhere.com']
 
 
 # Application definition
@@ -60,7 +60,8 @@ CORS_ORIGIN_WHITELIST = (
     'hostname.example.com',
     'localhost:4200',
     '127.0.0.1:4200',
-    '127.0.0.1:9000'
+    '127.0.0.1:9000',
+    'fayaz123.pythonanywhere.com'
 )
 
 CORS_ALLOW_METHODS = (
