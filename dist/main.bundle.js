@@ -236,7 +236,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var MainService = (function () {
-    // private url_http = 'http://localhost:8000/';
     function MainService(http, location) {
         this.http = http;
         this.headers = new __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Headers */]({
@@ -244,7 +243,8 @@ var MainService = (function () {
             "Access-Control-Allow-Origin": "*",
             'Access-Control-Allow-Headers': '*',
         });
-        this.url_http = 'http://localhost:8000/';
+        // private url_http = 'http://localhost:8000/';
+        this.url_http = 'http://fayaz123.pythonanywhere.com/';
         // this.url_http = window.location.origin + '/';
         // console.log(this.url_http)
     }

@@ -14,8 +14,8 @@ export class MainService{
 		"Access-Control-Allow-Origin":"*",
 		'Access-Control-Allow-Headers': '*',
 	});
-	private url_http = 'http://localhost:8000/';
 	// private url_http = 'http://localhost:8000/';
+	private url_http = 'http://fayaz123.pythonanywhere.com/';
 
 	constructor(private http : Http, location: Location,){
 		// this.url_http = window.location.origin + '/';
