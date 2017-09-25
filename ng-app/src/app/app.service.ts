@@ -61,7 +61,7 @@ export class MainService{
 		fd.append('username', data.username);
 		fd.append('password', data.password);
 
-		return this.http.post(url, fd, {headers : this.headers}).toPromise().then(response => response.json()).catch(this.handleError);
+		return this.http.post(url, fd).toPromise().then(response => response.json()).catch(this.handleError);
 	}
 
 

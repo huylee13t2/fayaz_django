@@ -75,6 +75,24 @@ export class LoginRegisterComponent {
 		});
 	}
 
+
+	login(){
+		console.log('login')
+
+		this._main.login(this.user).then(res => {
+			console.log(res)
+			if(res.result > 0){
+				this._service.success('Notification', 'Login succes!', this.options);
+				let data = res.data;
+				localStorage.setItem('token', data.token);
+				localStorage.setItem('user', JSON.stringify({'username' : data.username, 'email' : data.email, 'avatar' : data.avatar}));
+				setTimeout(() => {
+					this.router.navigate(['dashboard']);
+				}, 2000);
+			}
+		});
+	}
+
 	ngOnInit(): void{
 
 	}

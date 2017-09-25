@@ -9,6 +9,10 @@ from django.contrib.auth.models import User, Group
 from api.models import Profile
 
 
+def main(request):
+	return render(request, 'main.html', {})
+
+
 @csrf_exempt
 def register(request):
 	username = request.POST.get('username')
@@ -38,6 +42,35 @@ def register(request):
 	# except:
 	# 	response = {
 	# 		'result' : -999
+	# 	}
+
+	return JsonResponse(response)
+
+
+@csrf_exempt
+def login(request):
+	username = request.POST.get('username')
+	password = request.POST.get('password')
+	print('login')
+	# try:
+	account = Profile.objects.get(user__username = username)
+	if account.user.check_password(password):
+		response = {
+			'result' : account.id,
+			'data' : {
+				'username' : account.user.username,
+				'email' : account.user.email,
+				'token' : account.token,
+				'avatar' : account.avatar.name,
+			}
+		}
+	else:
+		response = {
+			'result' : 0,
+		}
+	# except:
+	# 	response = {
+	# 		'result' : -999,
 	# 	}
 
 	return JsonResponse(response)
