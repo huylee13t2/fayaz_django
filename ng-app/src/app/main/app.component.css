@@ -7,3 +7,25 @@
 .sidebar-wrapper {
     background: rgba(255, 77, 77, 0.92);
 }
+
+
+/* responsive */
+
+@media (max-width: 1199px) {
+	
+}
+@media (max-width: 991px) {
+	
+}
+@media (max-width: 767px) {
+	
+}
+@media (max-width: 625px) {
+	
+}
+@media (max-width: 480px) {
+
+}
+@media (max-width: 350px) {
+
+}

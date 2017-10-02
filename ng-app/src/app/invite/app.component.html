@@ -1,0 +1,13 @@
+<div class="registerPage">
+	<div class="signup"> 
+		<form class="signupForm" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate >
+			<h3>Invite Friends</h3>
+			<p>** You need 5 invitees to signup in order to get your access to the dashboard **</p>
+			<div class="form-group">
+				<label>Link invite</label>
+				<textarea class="form-control" rows="3">{{url_invite}}</textarea>
+			</div>
+		</form>
+	</div>
+</div>
+<simple-notifications [options]="options"></simple-notifications>

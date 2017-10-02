@@ -34,6 +34,25 @@ export class MainService{
 	// }
 
 
+	// get user by token
+	public getUser(token) : Promise<any> {
+		let url = this.url_http + 'api/get-user';
+		let fd = new FormData();
+		fd.append('token', token);
+		
+		return this.http.post(url, fd).toPromise().then(response => response.json()).catch(this.handleError);
+	}
+
+	// invite
+	public invite(token) : Promise<any> {
+		let url = this.url_http + 'api/invite';
+		let fd = new FormData();
+		fd.append('token', token);
+		
+		return this.http.post(url, fd).toPromise().then(response => response.json()).catch(this.handleError);
+	}
+
+
 	// user
 	public signup(data) : Promise<any> {
 		let url = this.url_http + 'api/register';

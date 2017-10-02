@@ -41,11 +41,12 @@ import { SimpleNotificationsModule, PushNotificationsModule } from 'angular2-not
 import { AppRoutingModule } from './app-routing.module';
 
 import { MainComponent } from './main/app.component';
+import { NavComponent } from './nav/app.component';
 import { LandPageComponent } from './land-page/app.component';
 import { DashboardComponent } from './dashboard/app.component';
+import { InviteComponent } from './invite/app.component';
+import { ProfileComponent } from './profile/app.component';
 // auth
-import { LoginComponent } from './auth/login/app.component';
-import { RegisterComponent } from './auth/register/app.component';
 import { LoginRegisterComponent } from './auth/login_register/app.component';
 
 // service
@@ -54,11 +55,12 @@ import { MainService } from './app.service';
 @NgModule({
 	declarations: [
 		MainComponent,
+		NavComponent,
 		LandPageComponent,
 		DashboardComponent,
+		InviteComponent,
+		ProfileComponent,
 		// auth
-		LoginComponent,
-		RegisterComponent,
 		LoginRegisterComponent,
 	],
 	imports: [
@@ -137,6 +139,7 @@ import { MainService } from './app.service';
 	],
 	providers: [
 		MainService,
+		{provide: Window, useValue: window},
 	],
 	bootstrap: [MainComponent]
 })

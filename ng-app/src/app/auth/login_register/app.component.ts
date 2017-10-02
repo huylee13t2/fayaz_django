@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SimpleNotificationsModule, NotificationsService } from 'angular2-notifications';
+import {ActivatedRoute} from '@angular/router';
 
 // use jquery
 import * as $ from 'jquery';
@@ -13,7 +14,7 @@ import { MainService } from '../../app.service'
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.css']
 })
-export class LoginRegisterComponent {
+export class LoginRegisterComponent implements OnInit {
 	user : any = {
 		type_account : 'paid',
 	};
@@ -21,10 +22,13 @@ export class LoginRegisterComponent {
 	tab_login : boolean;
 	tab_register : boolean;
 
+	public token : string;
+
 	constructor(
 		private router: Router,
 		private _main: MainService,
 		private _service: NotificationsService,
+		private route : ActivatedRoute
 		){ 
 		this.forgot_pass = true;
 		this.tab_login = true;
@@ -61,6 +65,10 @@ export class LoginRegisterComponent {
 				console.log('Signup!')
 				this._service.success('Notification', 'Register succes!', this.options);
 
+				if(this.token != undefined){
+					this._main.invite(this.token);
+				}
+
 				setTimeout(() => {
 					// this.tab_login = true;
 					// this.tab_register = false;
@@ -71,6 +79,8 @@ export class LoginRegisterComponent {
 					$('.tab_login').attr('aria-expanded', 'true');
 					$('.tab_signup').attr('aria-expanded', 'false');
 				}, 2000);
+			} else{
+				this._service.warn('Notification', 'Register error!', this.options);
 			}
 		});
 	}
@@ -85,15 +95,24 @@ export class LoginRegisterComponent {
 				this._service.success('Notification', 'Login succes!', this.options);
 				let data = res.data;
 				localStorage.setItem('token', data.token);
-				localStorage.setItem('user', JSON.stringify({'username' : data.username, 'email' : data.email, 'avatar' : data.avatar}));
+				localStorage.setItem('user', JSON.stringify({'username' : data.username, 'email' : data.email, 'avatar' : data.avatar, 'invite' : data.invite}));
 				setTimeout(() => {
-					this.router.navigate(['dashboard']);
+					if(data.invite >= 5){
+						this.router.navigate(['dashboard']);
+					} else{
+						this.router.navigate(['invite']);
+					}
 				}, 2000);
+			} else{
+				this._service.warn('Notification', 'Login error!', this.options);
 			}
 		});
 	}
 
 	ngOnInit(): void{
-
+		this.route.params.subscribe( params =>{
+			this.token = params['token'];
+			console.log('token = ' + this.token)
+		})
 	}
 }
