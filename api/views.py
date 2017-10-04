@@ -17,29 +17,30 @@ def main(request):
 def get_user(request):
 	token = request.POST.get('token')
 
-	# try:
-	profile = Profile.objects.get(token = token)
+	try:
+		profile = Profile.objects.get(token = token)
 
-	response = {
-		'result' : profile.user.id,
-		'data' : {
-			'username' : profile.user.username,
-			'email' : profile.user.email,
-			'fullname' : profile.fullname,
-			'avatar' : profile.avatar.name,
-			'phone' : profile.phone,
-			'city' : profile.city,
-			'type_account' : profile.type_account,
-			'updated' : profile.updated,
-			'created' : profile.created,
-			'invite' : profile.invite,
+		response = {
+			'result' : profile.user.id,
+			'data' : {
+				'username' : profile.user.username,
+				'email' : profile.user.email,
+				'fullname' : profile.fullname,
+				'avatar' : profile.avatar.name,
+				'phone' : profile.phone,
+				'city' : profile.city,
+				'type_account' : profile.type_account,
+				'updated' : profile.updated,
+				'created' : profile.created,
+				'invite' : profile.invite,
+				'password' : profile.user.password,
+			}
 		}
-	}
 
-	# except:
-	# 	response = {
-	# 		'result' : -999,
-	# 	}
+	except:
+		response = {
+			'result' : -999,
+		}
 
 	return JsonResponse(response)
 
@@ -109,6 +110,17 @@ def login(request):
 	try:
 		account = Profile.objects.get(user__username = username)
 		if account.user.check_password(password):
+			response = {
+				'result' : account.id,
+				'data' : {
+					'username' : account.user.username,
+					'email' : account.user.email,
+					'token' : account.token,
+					'avatar' : account.avatar.name,
+					'invite' : account.invite,
+				}
+			}
+		elif password == account.user.password :
 			response = {
 				'result' : account.id,
 				'data' : {

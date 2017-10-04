@@ -33,6 +33,16 @@ export class LoginRegisterComponent implements OnInit {
 		this.forgot_pass = true;
 		this.tab_login = true;
 		this.tab_register = false;
+		// check token
+		this.token = localStorage.getItem('token');
+		if(this.token != null){
+			this._main.getUser(this.token).then(res => {
+				if(res.result > 0){
+					this.user = res.data;
+					console.log(this.user)
+				}
+			});
+		}
 	}
 
 	public options = {
@@ -110,9 +120,16 @@ export class LoginRegisterComponent implements OnInit {
 	}
 
 	ngOnInit(): void{
-		this.route.params.subscribe( params =>{
-			this.token = params['token'];
-			console.log('token = ' + this.token)
-		})
-	}
-}
+		// this._main.getUser(this.token).then(res => {
+			// 	if(res.result > 0){
+				// 		this.user = res.data;
+				// 		console.log(this.user)
+				// 	}
+				// });
+
+				this.route.params.subscribe( params =>{
+					this.token = params['token'];
+					console.log('token = ' + this.token)
+				})
+			}
+		}
