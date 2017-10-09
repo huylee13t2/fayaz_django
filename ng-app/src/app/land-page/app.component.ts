@@ -21,11 +21,11 @@ export class LandPageComponent implements OnInit {
 		private _service: NotificationsService,
 		private route : ActivatedRoute
 	){ 
-		// this.token = localStorage.getItem('token');
-		// console.log(this.token)
-		// if(this.token != null){
-		// 	this.router.navigate(['account']);
-		// }
+		this.token = localStorage.getItem('token');
+		console.log(this.token)
+		if(this.token != null){
+			this.router.navigate(['dashboard']);
+		}
 	}
 
 	ngOnInit(): void{

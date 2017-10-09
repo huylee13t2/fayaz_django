@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { SimpleNotificationsModule, NotificationsService } from 'angular2-notifications';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-root',
@@ -24,6 +25,7 @@ export class InviteComponent implements OnInit {
 	constructor(
 		@Inject(Window) private _window: Window,
 		private _service: NotificationsService,
+		private router: Router,
 
 	){ 
 		this.token = localStorage.getItem('token');
@@ -34,6 +36,12 @@ export class InviteComponent implements OnInit {
 		setTimeout(() => {
 			this._service.warn('Notification', 'You need 5 invitees to signup in order to get your access to the dashboard', this.options);
 		}, 500);
+	}
+
+	logout(){
+		console.log('logout')
+		localStorage.clear();
+		this.router.navigate(['account']);
 	}
 
 	ngOnInit(): void{

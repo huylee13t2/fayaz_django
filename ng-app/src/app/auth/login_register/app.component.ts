@@ -38,8 +38,7 @@ export class LoginRegisterComponent implements OnInit {
 		if(this.token != null){
 			this._main.getUser(this.token).then(res => {
 				if(res.result > 0){
-					this.user = res.data;
-					console.log(this.user)
+					this.router.navigate(['dashboard']);
 				}
 			});
 		}

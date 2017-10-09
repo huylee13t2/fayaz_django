@@ -3,3 +3,7 @@
 		- url: https://github.com/fayazdjango123/my-project
 		- username : fayazdjango123
 		- pass : fayaz123
+
+	+ pythonanywhere:
+		user : fayaz123
+		Pass : A123123Z
